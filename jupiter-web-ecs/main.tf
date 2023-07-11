@@ -40,3 +40,10 @@ module "security-groups" {
   vpc_id = module.vpc.vpc_id
 
 }
+
+
+# create ec2 task definitions
+module "ecs" {
+  source       = "../Module/ecs"
+  project_name = module.vpc.project_name
+}
