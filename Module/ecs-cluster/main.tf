@@ -29,7 +29,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
 
   runtime_platform {
     operating_system_family = "LINUX"
-    cpu_architecture        = xxx
+    cpu_architecture        = "ARM64"
   }
 
   # create container definition
@@ -77,7 +77,7 @@ resource "aws_ecs_service" "ecs_service" {
 
   # vpc and security groups
   network_configuration {
-    subnets          = [var.private_app_subnet_az1_id, private_app_subnet_az2_id]
+    subnets          = [var.private_app_subnet_az1_id, var.private_app_subnet_az2_id]
     security_groups  = [var.webserver_sg_id]
     assign_public_ip = false
   }

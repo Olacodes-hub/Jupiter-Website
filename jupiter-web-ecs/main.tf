@@ -56,4 +56,18 @@ module "alb" {
   public_subnet_az2_id = module.vpc.public_subnet_az2_id
   certificate_arn      = var.certificate_arn
   vpc_id               = module.vpc.vpc_id
+
+}
+
+module "ecs-cluster" {
+  source                      = "../module/ecs-cluster"
+  project_name                = module.vpc.project_name
+  ecs_task_execution_role_arn = module.ecs.ecs_task_execution_role_arn
+  container_image             = var.container_image
+  region                      = module.vpc.region
+  private_app_subnet_az1_id   = module.vpc.private_app_subnet_az1_id
+  private_app_subnet_az2_id   = module.vpc.private_app_subnet_az2_id
+  webserver_sg_id             = module.security-groups.webserver_sg_id
+  alb_tg_arn                  = module.alb.alb_tg_arn
+
 }
