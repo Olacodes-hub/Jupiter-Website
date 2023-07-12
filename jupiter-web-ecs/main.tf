@@ -47,3 +47,13 @@ module "ecs" {
   source       = "../Module/ecs"
   project_name = module.vpc.project_name
 }
+
+module "alb" {
+  source               = "../Module/ALB"
+  project_name         = module.vpc.project_name
+  alb_sg_id            = module.security-groupscl.alb_sg_id
+  public_subnet_az1_id = module.vpc.public_subnet_az1_id
+  public_subnet_az2_id = module.vpc.public_subnet_az2_id
+  certificate_arn      = var.certificate_arn
+  vpc_id               = module.vpc.vpc_id
+}
